@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+//import { useSearchParams } from 'react-router-dom'
 import './GuestUpload.css'
 
 // =============================== CONFIG ==========================================
@@ -50,6 +50,7 @@ export default function GuestUpload() {
   };
 
   const currentEventId = getEventId()
+
 
   // ── Refs ──
   const streamRef = useRef<MediaStream | null>(null)
