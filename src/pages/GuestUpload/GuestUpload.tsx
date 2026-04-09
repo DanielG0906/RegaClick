@@ -40,8 +40,16 @@ function getDeviceFingerprint(): string {
 const DEVICE_FP = getDeviceFingerprint()
 
 export default function GuestUpload() {
-  const [searchParams] = useSearchParams()
-  const currentEventId = searchParams.get('eventID') || null
+  //const [searchParams] = useSearchParams()
+  //const currentEventId = searchParams.get('eventID') || null
+
+  const getEventId = () => {
+    const fullUrl = window.location.href;
+    const searchParams = new URLSearchParams(fullUrl.split('?')[1]);
+    return searchParams.get('eventID') ?? null;
+  };
+
+  const currentEventId = getEventId()
 
   // ── Refs ──
   const streamRef = useRef<MediaStream | null>(null)
