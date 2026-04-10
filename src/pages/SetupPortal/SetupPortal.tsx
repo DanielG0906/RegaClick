@@ -470,6 +470,7 @@ export default function SetupPortal() {
     color: selectedFontColor,
     fontSize: FONT_SIZES[selectedFontSize] || '1.2rem',
     fontWeight: selectedFontWeight as React.CSSProperties['fontWeight'],
+    fontStyle: 'italic',
   }
 
   const qrMiniCardStyle: React.CSSProperties = {
@@ -484,6 +485,7 @@ export default function SetupPortal() {
     color: '#3a2820',
     fontSize: FONT_SIZES[selectedFontSize] || '1.6rem',
     fontWeight: selectedFontWeight as React.CSSProperties['fontWeight'],
+    fontStyle: 'italic',
   }
 
   return (
@@ -909,7 +911,7 @@ export default function SetupPortal() {
                             style={coupleFontStyle}
                           >
                             <span className="name">{displayBride}</span>
-                            <span className="amp-span" style={{ color: roseColor, fontStyle: 'normal' }}>&</span>
+                            <span className="amp-span" style={{ color: roseColor }}>&</span>
                             <span className="name">{displayGroom}</span>
                           </div>
                           <div className="preview-heart-divider">
@@ -958,7 +960,7 @@ export default function SetupPortal() {
                     style={qrMiniFontStyle}
                   >
                     <span className="name">{displayBride}</span>
-                    <span style={{ color: roseColor, fontStyle: 'normal' }}>&</span>
+                    <span style={{ color: roseColor }}>&</span>
                     <span className="name">{displayGroom}</span>
                   </div>
                   <div className="qr-mini-divider"><span>♡</span></div>
