@@ -164,66 +164,114 @@ header {
   box-shadow: 0 1px 6px var(--shadow);
 }
 
+:root {
+  --rose: #e8c5b0;
+  --gold: #c9a96e;
+  --deep: #333;
+}
+
 .email-nudge {
   background: linear-gradient(135deg, rgba(232, 197, 176, 0.35) 0%, rgba(201, 169, 110, 0.18) 100%);
   border: 1px solid rgba(201, 169, 110, 0.45);
   border-radius: 16px;
-  padding: 14px 16px;
+  padding: 10px 12px;
   margin-top: 18px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 8px;
   position: relative;
   overflow: hidden;
+  text-align: center;
 }
 
 .email-nudge::after {
   content: '✉️';
   position: absolute;
   left: -4px;
-  bottom: -8px;
-  font-size: 3rem;
+  bottom: -6px;
+  font-size: 2rem;
   opacity: 0.07;
   pointer-events: none;
 }
 
 .email-nudge-icon {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   flex-shrink: 0;
 }
 
 .email-nudge-text {
-  flex: 1;
-  min-width: 0;
+  width: 100%;
 }
 
 .email-nudge-title {
   font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
   color: var(--deep);
-  margin-bottom: 3px;
+  margin-bottom: 2px;
+  line-height: 1.2;
 }
 
 .email-nudge-btn {
   background: linear-gradient(135deg, var(--rose), var(--gold));
   color: white;
   border: none;
-  border-radius: 20px;
-  padding: 9px 14px;
+  border-radius: 16px;
+  padding: 6px 12px;
   font-family: 'Jost', sans-serif;
   font-size: 0.68rem;
   letter-spacing: 0.05em;
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
-  box-shadow: 0 2px 10px rgba(196, 137, 111, 0.35);
+  box-shadow: 0 2px 8px rgba(196, 137, 111, 0.3);
   transition: all 0.2s;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .email-nudge-btn:active {
   transform: scale(0.95);
+}
+
+@media (min-width: 420px) {
+  .email-nudge {
+    padding: 14px 16px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    text-align: right;
+    gap: 12px;
+  }
+
+  .email-nudge::after {
+    font-size: 3rem;
+    bottom: -8px;
+  }
+
+  .email-nudge-icon {
+    font-size: 1.5rem;
+  }
+
+  .email-nudge-text {
+    width: auto;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .email-nudge-title {
+    margin-bottom: 3px;
+    line-height: normal;
+  }
+
+  .email-nudge-btn {
+    padding: 9px 14px;
+    font-size: 0.68rem;
+    border-radius: 20px;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .camera-wrap {

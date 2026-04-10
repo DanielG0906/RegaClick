@@ -95,6 +95,9 @@ export default function WeddingQR() {
 
     // Generate QR into a temp div first
     const temp = document.createElement('div')
+    temp.style.position = 'absolute'
+    temp.style.visibility = 'hidden'
+    temp.style.pointerEvents = 'none'
     document.body.appendChild(temp)
 
     new QRCode(temp, {
@@ -159,7 +162,7 @@ export default function WeddingQR() {
     async function loadEvent() {
       if (!eventId) {
         // אין eventID — הצג ברירת מחדל
-        setCoupleNamesHtml('שם הכלה <span class="amp">&</span> שם החתן')
+        setCoupleNamesHtml('<span class="name">שם הכלה</span><span class="amp">&</span><span class="name">שם החתן</span>')
         setDateBadge('תאריך החתונה · היום מתחיל הנצח')
         generateQR(appUrl)
         return
@@ -170,7 +173,7 @@ export default function WeddingQR() {
         if (data.found) {
           const { brideName, groomName, weddingDate, theme } = data.event
           // עדכן שמות
-          setCoupleNamesHtml(`${brideName} <span class="amp">&</span> ${groomName}`)
+          setCoupleNamesHtml(`<span class="name">${brideName}</span><span class="amp">&</span><span class="name">${groomName}</span>`)
           // עדכן תאריך
           if (weddingDate) {
             const d = new Date(weddingDate + 'T00:00:00')
@@ -182,7 +185,7 @@ export default function WeddingQR() {
         }
       } catch (e) {
         // fallback — אין חיבור
-        setCoupleNamesHtml('קרן <span class="amp">&</span> דניאל')
+        setCoupleNamesHtml('<span class="name">קרן</span><span class="amp">&</span><span class="name">דניאל</span>')
         setDateBadge('26 באוקטובר 2026 · היום מתחיל הנצח')
       }
       generateQR(appUrl)

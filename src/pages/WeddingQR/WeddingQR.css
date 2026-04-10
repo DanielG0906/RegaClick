@@ -13,7 +13,6 @@
 }
 
 .body {
-  min-height: 100vh;
   background: var(--cream);
   font-family: 'Jost', sans-serif;
 }
@@ -23,6 +22,7 @@
   align-items: center;
   justify-content: center;
   padding: 24px;
+  min-height: 100vh;
 }
 
 .card {
@@ -74,10 +74,24 @@
   font-style: italic;
   color: var(--deep);
   line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: baseline;
+  text-align: center;
+  gap: 0.2em;
+}
+
+.couple .name:first-child {
+  text-align: left;
+}
+
+.couple .name:last-child {
+  text-align: right;
 }
 
 .couple .amp {
   color: var(--rose);
+  padding: 0 0.25em;
 }
 
 .divider {

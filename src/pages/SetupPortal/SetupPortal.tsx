@@ -257,8 +257,8 @@ export default function SetupPortal() {
       setLookupBtnText('נשלח ✓')
       setLookupBtnDisabled(true)
 
-      // Countdown 30s for resend
-      let secs = 30
+      // Countdown 45s for resend
+      let secs = 45
       setOtpResendText(`שלח קוד חדש (${secs}s)`)
       setOtpResendVisible(true)
       setOtpResendDisabled(true)
@@ -297,6 +297,9 @@ export default function SetupPortal() {
         if (data.found) {
           setLookupStatus({ text: '✓ ברוכים הבאים חזרה! הפרטים שלכם נטענו.', cls: 'found' })
           populateForm(data.record)
+          setTimeout(() => {
+            outputSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }, 300)
         } else {
           setLookupStatus({ text: '✦ זוג חדש — בואו נגדיר את האירוע שלכם!', cls: 'new' })
         }
@@ -901,9 +904,9 @@ export default function SetupPortal() {
                             id="previewCouple"
                             style={coupleFontStyle}
                           >
-                            {displayBride}{' '}
-                            <span style={{ color: roseColor, fontStyle: 'normal' }}>&</span>{' '}
-                            {displayGroom}
+                            <span className="name">{displayBride}</span>
+                            <span className="amp-span" style={{ color: roseColor, fontStyle: 'normal' }}>&</span>
+                            <span className="name">{displayGroom}</span>
                           </div>
                           <div className="preview-heart-divider">
                             <div className="preview-line"></div>
@@ -950,9 +953,9 @@ export default function SetupPortal() {
                     id="qrMiniCouple"
                     style={qrMiniFontStyle}
                   >
-                    {displayBride}{' '}
-                    <span style={{ color: roseColor, fontStyle: 'normal' }}>&</span>{' '}
-                    {displayGroom}
+                    <span className="name">{displayBride}</span>
+                    <span style={{ color: roseColor, fontStyle: 'normal' }}>&</span>
+                    <span className="name">{displayGroom}</span>
                   </div>
                   <div className="qr-mini-divider"><span>♡</span></div>
                   <div className="qr-mini-box" id="qrMiniBox">

@@ -225,7 +225,7 @@ export default function GuestUpload() {
       streamRef.current = stream
       if (videoRef.current) {
         videoRef.current.srcObject = stream
-        videoRef.current.play()
+        videoRef.current.play().catch(() => {})
       }
       setShowCameraPlaceholder(false)
       setCameraReady(true)
@@ -651,9 +651,10 @@ export default function GuestUpload() {
   }
 
   function deleteSelected() {
-    const count = selectedIdsRef.current.size
+    const idsToDelete = new Set(selectedIdsRef.current)   // snapshot לפני ניקוי
+    const count = idsToDelete.size
     setQueue(prev => {
-      const next = prev.filter(i => !selectedIdsRef.current.has(i.id))
+      const next = prev.filter(i => !idsToDelete.has(i.id))
       queueRef.current = next
       return next
     })
