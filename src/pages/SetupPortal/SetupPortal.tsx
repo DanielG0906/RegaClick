@@ -15,7 +15,7 @@ const APP_BASE_URL = IS_LOCAL
 
 const APP_QR_URL = IS_LOCAL
   ? 'file:///C:/Users/Daniel%20Gurevich/OneDrive%20-%20Open%20University%20of%20Israel/שולחן%20העבודה/RegaClick/RegaClick/wedding-qr.html'
-  : 'https://danielg0906.github.io/RegaClick/wedding-qr/#/'
+  : 'https://danielg0906.github.io/RegaClick/#/wedding-qr'
 
 // ══════════════════════════════════════════════
 
