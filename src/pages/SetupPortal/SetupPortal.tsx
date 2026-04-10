@@ -883,7 +883,7 @@ export default function SetupPortal() {
           </div>
 
           <div className="preview-body">
-            <div className="preview-screens-wrap" style={{ height: '420px', width: '200px' }}>
+            <div className="preview-screens-wrap" style={{ height: '100%', width: '200px' }}>
 
               {/* App phone preview */}
               <div
