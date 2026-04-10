@@ -12,13 +12,16 @@
   box-sizing: border-box;
 }
 
-body {
+.body {
   min-height: 100vh;
   background: var(--cream);
+  font-family: 'Jost', sans-serif;
+}
+
+.wedding-qr-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Jost', sans-serif;
   padding: 24px;
 }
 

@@ -193,26 +193,27 @@ export default function WeddingQR() {
   }, [eventId])
 
   return (
-    <div className="card" id="card">
-      <p className="eyebrow">מוזמנים לשתף איתנו</p>
-      <div
-        className="couple"
-        id="coupleNames"
-        dangerouslySetInnerHTML={{ __html: coupleNamesHtml }}
-      />
-      <div className="divider"><span>♡</span></div>
+    <div className="wedding-qr-container">
+      <div className="card" id="card">
+        <p className="eyebrow">מוזמנים לשתף איתנו</p>
+        <div
+          className="couple"
+          id="coupleNames"
+          dangerouslySetInnerHTML={{ __html: coupleNamesHtml }}
+        />
+        <div className="divider"><span>♡</span></div>
 
-      <div className="qr-frame">
-        <div id="qr-br"></div>
-        <div id="qr-tr"></div>
-        <div id="qrcode" ref={qrContainerRef}></div>
+        <div className="qr-frame">
+          <div id="qr-br"></div>
+          <div id="qr-tr"></div>
+          <div id="qrcode" ref={qrContainerRef}></div>
+        </div>
+
+        <p className="cta">סרקו כדי לתעד רגעים<br />לאלבום המשותף שלנו</p>
+        <p className="subcta">כוונו את המצלמה לקוד למעלה</p>
+        <div className="date-badge" id="dateBadge">{dateBadge}</div>
+
       </div>
-
-      <p className="cta">סרקו כדי לתעד רגעים<br />לאלבום המשותף שלנו</p>
-      <p className="subcta">כוונו את המצלמה לקוד למעלה</p>
-      <div className="date-badge" id="dateBadge">{dateBadge}</div>
-
-
     </div>
   )
 }
