@@ -708,6 +708,7 @@ export default function SetupPortal() {
                     key={key}
                     className={`font-card ${cls}${selectedFont === key ? ' selected' : ''}`}
                     data-font={key}
+                    style={isLocked ? { opacity: '.5', cursor: 'not-allowed' } : {}}
                     onClick={() => { if (!isLocked) setSelectedFont(key) }}
                   >
                     <div className="theme-check">✓</div>
@@ -735,9 +736,9 @@ export default function SetupPortal() {
                         key={color}
                         className={`color-swatch${selectedFontColor === color ? ' active' : ''}`}
                         data-color={color}
-                        style={{ background: color, ...extraStyle }}
+                        style={{ background: color, ...extraStyle, ...(isLocked ? { opacity: '.5', cursor: 'not-allowed' } : {}) }}
                         title={title}
-                        onClick={() => setSelectedFontColor(color)}
+                        onClick={() => { if (!isLocked) setSelectedFontColor(color) }}
                       ></div>
                     ))}
                   </div>
@@ -755,6 +756,7 @@ export default function SetupPortal() {
                         key={size}
                         className={`size-btn${selectedFontSize === size ? ' active' : ''}`}
                         data-size={size}
+                        disabled={isLocked}
                         onClick={() => setSelectedFontSize(size)}
                       >
                         {label}
@@ -773,6 +775,7 @@ export default function SetupPortal() {
                         key={weight}
                         className={`weight-btn${selectedFontWeight === weight ? ' active' : ''}`}
                         data-weight={weight}
+                        disabled={isLocked}
                         onClick={() => setSelectedFontWeight(weight)}
                       >
                         {label}
@@ -801,6 +804,7 @@ export default function SetupPortal() {
                     key={key}
                     className={`texture-card${selectedTexture === key ? ' selected' : ''}`}
                     data-texture={key}
+                    style={isLocked ? { opacity: '.5', cursor: 'not-allowed' } : {}}
                     onClick={() => { if (!isLocked) setSelectedTexture(key) }}
                   >
                     <div className="theme-check">✓</div>
