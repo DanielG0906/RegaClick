@@ -206,6 +206,35 @@
   margin-bottom: 20px;
 }
 
+.instagram-credit {
+  position: absolute;
+  bottom: 6px;
+  left: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  color: var(--blush);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+  font-family: 'Jost', sans-serif;
+  direction: ltr;
+}
+
+.ig-icon {
+  width: 14px;
+  height: 14px;
+  stroke: var(--blush);
+  flex-shrink: 0;
+}
+
+@media print {
+  .instagram-credit {
+    opacity: 0.5;
+  }
+}
+
 .date-badge {
   display: inline-block;
   background: linear-gradient(135deg, var(--rose), var(--gold));
