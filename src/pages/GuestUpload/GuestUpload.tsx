@@ -225,7 +225,7 @@ export default function GuestUpload() {
       streamRef.current = stream
       if (videoRef.current) {
         videoRef.current.srcObject = stream
-        videoRef.current.play().catch(() => {})
+        videoRef.current.play().catch(() => { })
       }
       setShowCameraPlaceholder(false)
       setCameraReady(true)
@@ -988,9 +988,9 @@ export default function GuestUpload() {
             <div className="email-nudge" id="emailNudge">
               <div className="email-nudge-icon">💌</div>
               <div className="email-nudge-text">
-                <div className="email-nudge-title">רוצה שהתמונות יתויגו על שמכם?</div>
+                <div className="email-nudge-title">רוצה לקבל מחר את כל התמונות והסרטונים מהחגיגה למייל?</div>
               </div>
-              <button className="email-nudge-btn" onClick={openEmailModal}>הזינו כאן את המייל לשיוך התמונות ✉️</button>
+              <button className="email-nudge-btn" onClick={openEmailModal}>הזינו כאן את המייל  ✉️</button>
             </div>
           )}
         </div>
@@ -1012,8 +1012,8 @@ export default function GuestUpload() {
           <div className="modal-card">
             <button className="modal-close" onClick={closeEmailModal}>✕</button>
             <div className="modal-icon">💌</div>
-            <div className="modal-title">רוצה שהתמונות יתויגו על שמכם?</div>
-            <p className="modal-desc">הזינו את המייל שלכם כדי לשייך את התמונות שתעלו. כך תוכלו למצוא אותן בקלות באלבום המשותף שתקבלו לאחר האירוע</p>
+            <div className="modal-title">רוצה לקבל מחר את כל התמונות והסרטונים מהחגיגה למייל?</div>
+            <p className="modal-desc">הזינו מייל ונדאג שכל התמונות והסרטונים שצולמו כאן היום יחכו לכם מחר בבוקר בתיבת הדואר.</p>
             <div className="email-input-wrap">
               <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
