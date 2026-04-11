@@ -1013,7 +1013,7 @@ export default function GuestUpload() {
             <button className="modal-close" onClick={closeEmailModal}>✕</button>
             <div className="modal-icon">💌</div>
             <div className="modal-title">רוצה לקבל מחר את כל התמונות והסרטונים מהחגיגה למייל?</div>
-            <p className="modal-desc">הזינו מייל ונדאג שכל התמונות והסרטונים שצולמו כאן היום יחכו לכם מחר בבוקר בתיבת הדואר.</p>
+            <p className="modal-desc">הזינו מייל ונדאג שכל התמונות והסרטונים שצולמו כאן היום יחכו לכם מחר בתיבת הדואר שלכם.</p>
             <div className="email-input-wrap">
               <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
