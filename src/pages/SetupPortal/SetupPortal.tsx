@@ -176,6 +176,7 @@ export default function SetupPortal() {
   const otpCountdownRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const brideNameInputRef = useRef<HTMLInputElement>(null)
   const groomNameInputRef = useRef<HTMLInputElement>(null)
+  const dateInputRef = useRef<HTMLInputElement>(null)
   const outputSectionRef = useRef<HTMLDivElement>(null)
 
   // ── Toast ──
@@ -202,18 +203,22 @@ export default function SetupPortal() {
 
   // ── Date validation ──
   function validateDate(): boolean {
-    if (!weddingDate) { setDateError(''); return false }
+    if (!weddingDate) {
+      setDateError('יש להזין תאריך חתונה')
+      dateInputRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      dateInputRef.current?.focus()
+      return false
+    }
     const tomorrow = new Date()
     tomorrow.setHours(0, 0, 0, 0)
     tomorrow.setDate(tomorrow.getDate() + 1)
     const chosen = new Date(weddingDate + 'T00:00:00')
     if (chosen <= tomorrow) {
       setDateError('⚠️ יש לבחור תאריך שהוא לפחות יומיים מהיום')
-      setSaveBtnDisabled(true)
+      dateInputRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
       return false
     }
     setDateError('')
-    setSaveBtnDisabled(false)
     return true
   }
 
@@ -349,12 +354,11 @@ export default function SetupPortal() {
 
   // ── Save ──
   async function saveData() {
-    if (!validateDate()) return
     const trimmedBride = brideName.trim()
     const trimmedGroom = groomName.trim()
     if (!trimmedBride) { showFieldError('brideName'); return }
     if (!trimmedGroom) { showFieldError('groomName'); return }
-    if (!weddingDate) { showToast('אנא בחרו תאריך חתונה', 'error'); return }
+    if (!validateDate()) return
 
     setSaveBtnDisabled(true)
     setSaveBtnText('שומר...')
@@ -594,7 +598,7 @@ export default function SetupPortal() {
                     onChange={e => { setBrideName(e.target.value); setBrideNameError(false) }}
                   />
                   <div className={`field-error-msg${brideNameError ? ' show' : ''}`} id="brideNameErr">
-                    אנא הכניסו שם כלה
+                    יש להזין שם כלה
                   </div>
                 </div>
                 <div className="field">
@@ -611,13 +615,14 @@ export default function SetupPortal() {
                     onChange={e => { setGroomName(e.target.value); setGroomNameError(false) }}
                   />
                   <div className={`field-error-msg${groomNameError ? ' show' : ''}`} id="groomNameErr">
-                    אנא הכניסו שם חתן
+                    יש להזין שם חתן
                   </div>
                 </div>
               </div>
               <div className="field">
                 <label>תאריך החתונה</label>
                 <input
+                  ref={dateInputRef}
                   type="date"
                   id="weddingDate"
                   disabled={isLocked}
@@ -633,30 +638,14 @@ export default function SetupPortal() {
                     const chosen = new Date(v + 'T00:00:00')
                     if (chosen <= tomorrow) {
                       setDateError('⚠️ יש לבחור תאריך שהוא לפחות יומיים מהיום')
-                      setSaveBtnDisabled(true)
                     } else {
                       setDateError('')
-                      setSaveBtnDisabled(false)
                     }
-                    checkLocked(v, currentEventId)
                   }}
                 />
-                {dateError && (
-                  <div
-                    id="dateError"
-                    style={{
-                      marginTop: '8px',
-                      padding: '10px 14px',
-                      borderRadius: '10px',
-                      background: 'rgba(180,60,60,0.08)',
-                      color: '#b43c3c',
-                      fontSize: '0.78rem',
-                      lineHeight: '1.5',
-                    }}
-                  >
-                    {dateError}
-                  </div>
-                )}
+                <div className={`field-error-msg${dateError ? ' show' : ''}`} id="dateError">
+                  {dateError}
+                </div>
               </div>
             </div>
 
@@ -859,7 +848,7 @@ export default function SetupPortal() {
               </div>
               <div className="output-disclaimer">
                 <span className="disclaimer-star">✦</span>
-                התחרטתם? אל דאגה — ניתן לחזור ולשנות את העיצוב בכל עת עד יום לפני החתונה
+                התחרטתם? אל דאגה — ניתן לחזור ולשנות את העיצוב בכל עת עד יומיים לפני החתונה
               </div>
             </div>
 

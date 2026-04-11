@@ -179,6 +179,18 @@ export default function GuestUpload() {
       dots: 'radial-gradient(circle, currentColor 1px, transparent 1px)',
       grid: 'linear-gradient(rgba(201,169,110,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(201,169,110,.12) 1px, transparent 1px)',
       leaves: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\'%3E%3Cpath d=\'M25,5 Q35,25 25,45 Q15,25 25,5Z\' fill=\'none\' stroke=\'%238a9e8b\' stroke-width=\'1\' opacity=\'.35\'/%3E%3Cpath d=\'M5,25 Q25,15 45,25 Q25,35 5,25Z\' fill=\'none\' stroke=\'%238a9e8b\' stroke-width=\'1\' opacity=\'.25\'/%3E%3C/svg%3E")',
+      waves: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'60\' height=\'20\'%3E%3Cpath d=\'M0,10 Q15,0 30,10 Q45,20 60,10\' fill=\'none\' stroke=\'%23c9a96e\' stroke-width=\'1\' opacity=\'.3\'/%3E%3C/svg%3E")',
+      diamonds: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'30\' height=\'30\'%3E%3Crect x=\'15\' y=\'2\' width=\'18\' height=\'18\' fill=\'none\' stroke=\'%23c9a96e\' stroke-width=\'0.8\' opacity=\'.3\' transform=\'rotate(45 15 11)\'/%3E%3C/svg%3E")',
+      crosses: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\'%3E%3Cline x1=\'12\' y1=\'4\' x2=\'12\' y2=\'20\' stroke=\'%23c9a96e\' stroke-width=\'0.8\' opacity=\'.25\'/%3E%3Cline x1=\'4\' y1=\'12\' x2=\'20\' y2=\'12\' stroke=\'%23c9a96e\' stroke-width=\'0.8\' opacity=\'.25\'/%3E%3C/svg%3E")',
+    }
+    const texSizes: Record<string, string> = {
+      dots: '18px 18px',
+      grid: '20px 20px',
+      waves: '60px 20px',
+      diamonds: '30px 30px',
+      crosses: '24px 24px',
+      petals: '40px 40px',
+      leaves: '50px 50px',
     }
     const t = themes[theme] || themes.classic
     const r = document.documentElement;
@@ -202,9 +214,7 @@ export default function GuestUpload() {
     }
     if (texture && textures[texture]) {
       document.body.style.backgroundImage = textures[texture]
-      if (texture === 'dots') document.body.style.backgroundSize = '18px 18px'
-      else if (texture === 'grid') document.body.style.backgroundSize = '20px 20px'
-      else document.body.style.backgroundSize = ''
+      document.body.style.backgroundSize = texSizes[texture] || ''
     }
   }
 
@@ -416,13 +426,11 @@ export default function GuestUpload() {
     if (!weddingDate || !eventId) return
     let allowed = true
     let expired = false
-    let serverWeddingDate = weddingDate
     try {
       const res = await fetch(`${GAS_URL}?action=checkDate&eventID=${eventId}`)
       const data = await res.json()
       allowed = data.allowed
       expired = data.expired || false
-      if (data.weddingDate) serverWeddingDate = data.weddingDate
     } catch (_err) {
       const todayStr = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Jerusalem' })
       allowed = todayStr === weddingDate
@@ -436,18 +444,16 @@ export default function GuestUpload() {
       return
     }
     if (!allowed) {
-      lockCamera(serverWeddingDate)
+      lockCamera()
     }
   }
 
-  function lockCamera(weddingDate: string) {
+  function lockCamera() {
     setShutterDisabled(true)
     setShutterStyle({ opacity: '0.35', cursor: 'not-allowed' } as React.CSSProperties)
     setSelectModeBtnHidden(true)
     setUploadAllBtnHidden(true)
-    const d = new Date(weddingDate + 'T00:00:00')
-    const formatted = d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' })
-    showMsg('האפליקציה תהיה פעילה רק ביום החתונה · ' + formatted, '')
+    showMsg('האפליקציה תהיה פעילה רק ביום החתונה', '')
   }
 
   // ── loadEventData ──
