@@ -467,7 +467,8 @@ export default function GuestUpload() {
         setBrideName(bn)
         setGroomName(gn)
       }
-      await checkDateLock(weddingDate, eventId)
+      hideLoading()
+      checkDateLock(weddingDate, eventId)
       if (weddingDate) {
         const d = new Date(weddingDate + 'T00:00:00')
         setHeaderSub(
@@ -497,7 +498,6 @@ export default function GuestUpload() {
         }
       }
 
-      hideLoading()
     } catch (_e) { hideLoading() }
   }
 
