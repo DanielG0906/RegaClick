@@ -91,6 +91,7 @@ export default function GuestUpload() {
   void cameraReady
   const [emailInputVal, setEmailInputVal] = useState('')
   const [emailInputError, setEmailInputError] = useState(false)
+  const [eventLoaded, setEventLoaded] = useState(false)
   const [brideName, setBrideName] = useState('שם הכלה')
   const [groomName, setGroomName] = useState('שם החתן')
   const [coupleAmpStyle, setCoupleAmpStyle] = useState<React.CSSProperties>({})
@@ -459,15 +460,16 @@ export default function GuestUpload() {
   // ── loadEventData ──
   async function loadEventData(eventId: string) {
     try {
+      hideLoading()
       const res = await fetch(GAS_URL + '?action=event&eventID=' + eventId)
       const data = await res.json()
-      if (!data.found) { hideLoading(); setErrorScreen({ show: true, msg: '' }); return }
+      if (!data.found) { setErrorScreen({ show: true, msg: '' }); return }
       const { brideName: bn, groomName: gn, weddingDate, theme } = data.event
       if (bn && gn) {
         setBrideName(bn)
         setGroomName(gn)
       }
-      hideLoading()
+      setEventLoaded(true)
       checkDateLock(weddingDate, eventId)
       if (weddingDate) {
         const d = new Date(weddingDate + 'T00:00:00')
@@ -498,7 +500,7 @@ export default function GuestUpload() {
         }
       }
 
-    } catch (_e) { hideLoading() }
+    } catch (_e) { }
   }
 
   // ── init ──
@@ -796,7 +798,7 @@ export default function GuestUpload() {
 
       <div className="app">
         <header>
-          <div className="couple-names" id="coupleNames">
+          <div className={`couple-names${eventLoaded ? '' : ' names-loading'}`} id="coupleNames">
             <span id="brideName-display" style={brideNameStyle}>{brideName}</span>
             <div className="couple-amp" id="couple-amp" style={coupleAmpStyle}>&amp;</div>
             <span id="groomName-display" style={groomNameStyle}>{groomName}</span>

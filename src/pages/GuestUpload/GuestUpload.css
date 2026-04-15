@@ -64,6 +64,20 @@ header {
   padding: 12px 0 20px;
 }
 
+.couple-names.names-loading span,
+.couple-names.names-loading .couple-amp {
+  color: transparent !important;
+  background: linear-gradient(90deg, #e8d5c8 25%, #f5ece6 50%, #e8d5c8 75%);
+  background-size: 200% 100%;
+  border-radius: 6px;
+  animation: names-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes names-shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
 .couple-names {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
