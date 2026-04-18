@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import './WeddingQR.css'
+import cameraPhotoImg from '../../assets/CameraPhoto.png'
 
 declare const QRCode: any
 
@@ -102,56 +103,24 @@ export default function WeddingQR() {
 
     new QRCode(temp, {
       text: url,
-      width: 180,
-      height: 180,
+      width: 116,
+      height: 116,
       colorDark: '#3a2820',
       colorLight: '#ffffff',
       correctLevel: QRCode.CorrectLevel.M,
     })
 
-    // Wait for QR canvas to render then overlay heart
     setTimeout(() => {
       const qrCanvas = temp.querySelector('canvas') as HTMLCanvasElement | null
       if (!qrCanvas) { document.body.removeChild(temp); return }
 
-      // Create output canvas
       const canvas = document.createElement('canvas')
-      canvas.width = 180; canvas.height = 180
+      canvas.width = 116; canvas.height = 116
       canvas.style.borderRadius = '8px'
       const ctx = canvas.getContext('2d')!
-
-      // Draw QR
       ctx.drawImage(qrCanvas, 0, 0)
 
-      // White circle background for heart
-      const cx = 90, cy = 90
-      ctx.beginPath()
-      ctx.arc(cx, cy, 26, 0, Math.PI * 2)
-      ctx.fillStyle = 'white'
-      ctx.fill()
-
-      // Draw large heart centered
-      ctx.save()
-      ctx.translate(cx, cy)
-      ctx.beginPath()
-      ctx.moveTo(0, 8)
-      ctx.bezierCurveTo(-3, 4, -18, 3, -18, -7)
-      ctx.bezierCurveTo(-18, -17, -4, -17, 0, -9)
-      ctx.bezierCurveTo(4, -17, 18, -17, 18, -7)
-      ctx.bezierCurveTo(18, 3, 3, 4, 0, 8)
-      ctx.closePath()
-      const grad = ctx.createLinearGradient(-18, -17, 18, 8)
-      grad.addColorStop(0, '#c4896f')
-      grad.addColorStop(1, '#c9a96e')
-      ctx.fillStyle = grad
-      ctx.fill()
-      // Small shine
-      ctx.beginPath()
-      ctx.arc(-6, -8, 3.5, 0, Math.PI * 2)
-      ctx.fillStyle = 'rgba(255,255,255,0.3)'
-      ctx.fill()
-      ctx.restore()
-
+      container.innerHTML = ''
       container.appendChild(canvas)
       document.body.removeChild(temp)
     }, 100)
@@ -163,7 +132,7 @@ export default function WeddingQR() {
       if (!eventId) {
         // אין eventID — הצג ברירת מחדל
         setCoupleNamesHtml('<span class="name">שם הכלה</span><span class="amp">&</span><span class="name">שם החתן</span>')
-        setDateBadge('תאריך החתונה · היום מתחיל הנצח')
+        setDateBadge('תאריך החתונה')
         generateQR(appUrl)
         return
       }
@@ -178,7 +147,7 @@ export default function WeddingQR() {
           if (weddingDate) {
             const d = new Date(weddingDate + 'T00:00:00')
             const formatted = d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' })
-            setDateBadge(`${formatted} · היום מתחיל הנצח`)
+            setDateBadge(`· ${formatted} ·`)
           }
           // עדכן עיצוב
           if (theme) applyTheme(theme, data.event.font, data.event.texture, data.event.fontColor, data.event.fontSize, data.event.fontWeight)
@@ -186,7 +155,7 @@ export default function WeddingQR() {
       } catch (e) {
         // fallback — אין חיבור
         setCoupleNamesHtml('<span class="name">קרן</span><span class="amp">&</span><span class="name">דניאל</span>')
-        setDateBadge('26 באוקטובר 2026 · היום מתחיל הנצח')
+        setDateBadge('· 26 באוקטובר 2026 ·')
       }
       generateQR(appUrl)
     }
@@ -198,22 +167,24 @@ export default function WeddingQR() {
   return (
     <div className="wedding-qr-container">
       <div className="card" id="card">
-        <p className="eyebrow">מוזמנים לשתף איתנו</p>
         <div
           className="couple"
           id="coupleNames"
           dangerouslySetInnerHTML={{ __html: coupleNamesHtml }}
         />
+        <p className="cta">סרקו צלמו ושתפו רגעים מיוחדים לאלבום המשותף שלנו</p>
+
         <div className="divider"><span>♡</span></div>
 
-        <div className="qr-frame">
-          <div id="qr-br"></div>
-          <div id="qr-tr"></div>
-          <div id="qrcode" ref={qrContainerRef}></div>
+        <div className="qr-composite">
+          <img src={cameraPhotoImg} className="qr-composite-bg" alt="" aria-hidden="true" />
+          <div className="qr-on-wall">
+            <div id="qrcode" ref={qrContainerRef}></div>
+          </div>
         </div>
 
-        <p className="cta">סרקו כדי לתעד רגעים<br />לאלבום המשותף שלנו</p>
-        <p className="subcta">כוונו את המצלמה לקוד למעלה</p>
+        <p className="eternal-text">הפכו את הרגעים היפים של האירוע לזיכרון נצחי</p>
+
         <div className="date-badge" id="dateBadge">{dateBadge}</div>
 
         <div className="instagram-credit">
