@@ -1355,14 +1355,6 @@ body {
   transform: rotate(180deg);
 }
 
-.qr-mini-eyebrow {
-  font-size: .5rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--rose);
-  margin-bottom: 6px;
-}
-
 .qr-mini-couple {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
@@ -1412,21 +1404,6 @@ body {
   font-size: .75rem;
 }
 
-.qr-mini-box {
-  width: 110px;
-  height: 110px;
-  margin: 6px auto 10px;
-  border-radius: 12px;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid var(--blush);
-  font-size: .6rem;
-  color: var(--muted);
-  position: relative;
-}
-
 .qr-mini-box::before,
 .qr-mini-box::after {
   content: '';
@@ -1451,21 +1428,24 @@ body {
   border-radius: 0 0 4px 0;
 }
 
+.eternal-text {
+  font-family: 'Varela Round', serif;
+  font-size: 0.45rem !important;
+  font-weight: 800;
+  color: var(--deep);
+  line-height: 1.6;
+  margin: 10px 0 14px;
+  text-align: center;
+  direction: rtl;
+}
+
 .qr-mini-cta {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: .75rem;
+  font-size: .85rem;
   color: black;
   line-height: 1.4;
   margin-bottom: 4px;
-}
-
-.qr-mini-subcta {
-  font-size: .5rem;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: black;
-  margin-bottom: 10px;
 }
 
 .qr-mini-date {

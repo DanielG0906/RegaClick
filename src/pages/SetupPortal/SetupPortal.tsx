@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import './SetupPortal.css'
+import cameraPhotoImg from '../../assets/CameraPhotoQR.png'
 
 // ══════════════════════════════════════════════
 //  CONFIG — אוטומטי לפי סביבה
@@ -942,7 +943,6 @@ export default function SetupPortal() {
                 id="previewQRWrap"
               >
                 <div className="qr-mini-card" id="qrMiniCard" style={qrMiniCardStyle}>
-                  <div className="qr-mini-eyebrow">מוזמנים לשתף איתנו</div>
                   <div
                     className="qr-mini-couple"
                     id="qrMiniCouple"
@@ -952,14 +952,14 @@ export default function SetupPortal() {
                     <span style={{ color: roseColor }}>&</span>
                     <span className="name">{displayGroom}</span>
                   </div>
+                  <div className="qr-mini-cta">
+                    סרקו צלמו ושתפו רגעים מיוחדים לאלבום המשותף שלנו
+                  </div>
                   <div className="qr-mini-divider"><span>♡</span></div>
                   <div className="qr-mini-box" id="qrMiniBox">
-                    <span style={{ fontSize: '1.8rem' }}>⬛</span>
+                    <img src={cameraPhotoImg} className="qr-composite-bg" alt="" aria-hidden="true" />
                   </div>
-                  <div className="qr-mini-cta">
-                    סרקו כדי לתעד רגעים<br />לאלבום המשותף שלנו
-                  </div>
-                  <div className="qr-mini-subcta">כוונו את המצלמה לקוד למעלה</div>
+                  <p className="eternal-text">הפכו את הרגעים היפים של האירוע לזיכרון נצחי</p>
                   <div className="qr-mini-date" id="qrMiniDate">
                     {dateStr}
                   </div>
