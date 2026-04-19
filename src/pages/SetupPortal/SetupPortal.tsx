@@ -959,7 +959,7 @@ export default function SetupPortal() {
                   <div className="qr-mini-box" id="qrMiniBox">
                     <img src={cameraPhotoImg} className="qr-composite-bg" alt="" aria-hidden="true" />
                   </div>
-                  <p className="eternal-text">הפכו את הרגעים היפים של האירוע לזיכרון נצחי</p>
+                  <p className="eternal-textP">הפכו את הרגעים היפים של האירוע לזיכרון נצחי</p>
                   <div className="qr-mini-date" id="qrMiniDate">
                     {dateStr}
                   </div>
