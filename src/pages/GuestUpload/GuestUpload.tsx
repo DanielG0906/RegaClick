@@ -937,7 +937,7 @@ export default function GuestUpload() {
 
           <div className={`queue-grid${selectMode ? ' select-mode' : ''}`} id="queueGrid">
             {queue.length === 0 ? (
-              <div className="empty-state" style={{ gridColumn: '1/-1' }}>צלמו תמונות ויצטרפו לאלבום ✨</div>
+              <div className="empty-state" style={{ gridColumn: '1/-1' }}>צלמו תמונות וצרפו אותם לאלבום ✨</div>
             ) : (
               queue.map(item => (
                 <div

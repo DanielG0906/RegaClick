@@ -130,7 +130,6 @@ export default function WeddingQR() {
     document.title = 'RegaClick - QR'
     async function loadEvent() {
       if (!eventId) {
-        // אין eventID — הצג ברירת מחדל
         setCoupleNamesHtml('<span class="name">שם הכלה</span><span class="amp">&</span><span class="name">שם החתן</span>')
         setDateBadge('תאריך החתונה')
         generateQR(appUrl)
@@ -141,19 +140,15 @@ export default function WeddingQR() {
         const data = await res.json()
         if (data.found) {
           const { brideName, groomName, weddingDate, theme } = data.event
-          // עדכן שמות
           setCoupleNamesHtml(`<span class="name">${brideName}</span><span class="amp">&</span><span class="name">${groomName}</span>`)
-          // עדכן תאריך
           if (weddingDate) {
             const d = new Date(weddingDate + 'T00:00:00')
             const formatted = d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' })
             setDateBadge(`· ${formatted} ·`)
           }
-          // עדכן עיצוב
           if (theme) applyTheme(theme, data.event.font, data.event.texture, data.event.fontColor, data.event.fontSize, data.event.fontWeight)
         }
       } catch (e) {
-        // fallback — אין חיבור
         setCoupleNamesHtml('<span class="name">קרן</span><span class="amp">&</span><span class="name">דניאל</span>')
         setDateBadge('· 26 באוקטובר 2026 ·')
       }
@@ -172,6 +167,7 @@ export default function WeddingQR() {
           id="coupleNames"
           dangerouslySetInnerHTML={{ __html: coupleNamesHtml }}
         />
+
         <p className="cta">סרקו צלמו ושתפו רגעים מיוחדים לאלבום המשותף שלנו</p>
 
         <div className="divider"><span>♡</span></div>
