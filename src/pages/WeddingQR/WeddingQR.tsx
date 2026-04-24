@@ -5,8 +5,7 @@ import cameraPhotoImg from '../../assets/CameraPhoto.png'
 
 declare const QRCode: any
 
-const GAS_URL =
-  'https://script.google.com/macros/s/AKfycbwpYzRO0vSM8eqY8EVos4q9fF6pmVtLXhM6MGoqP3A7gppbq5JiQFsFLkmq8B5wKs_p/exec'
+const GAS_URL = 'https://znodvoycqqyjohraoaex.supabase.co/functions/v1/api'
 
 const THEMES: Record<string, { rose: string; gold: string; deep: string; blush: string; cream: string }> = {
   classic: { rose: '#c4896f', gold: '#c9a96e', deep: '#3a2820', blush: '#e8c5b0', cream: '#faf6f1' },
@@ -86,8 +85,8 @@ export default function WeddingQR() {
   const qrContainerRef = useRef<HTMLDivElement>(null)
 
   const appUrl = eventId
-    ? `https://danielg0906.github.io/Moments_of_the_wedding?eventID=${eventId}`
-    : 'https://danielg0906.github.io/Moments_of_the_wedding'
+    ? `https://danielg0906.github.io/RegaClick/#/?eventID=${eventId}`
+    : 'https://danielg0906.github.io/RegaClick/#/'
 
   function generateQR(url: string) {
     const container = qrContainerRef.current

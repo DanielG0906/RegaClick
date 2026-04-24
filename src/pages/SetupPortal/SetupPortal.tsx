@@ -7,8 +7,11 @@ import cameraPhotoImg from '../../assets/CameraPhotoQR.png'
 // ══════════════════════════════════════════════
 const IS_LOCAL = window.location.protocol === 'file:'
 
-const SETUP_GAS_URL =
-  'https://script.google.com/macros/s/AKfycbwpYzRO0vSM8eqY8EVos4q9fF6pmVtLXhM6MGoqP3A7gppbq5JiQFsFLkmq8B5wKs_p/exec'
+// OTP + מיילים — נשאר ב-GAS (MailApp בחינם, עובד מצוין)
+const GAS_OTP_URL = 'https://script.google.com/macros/s/AKfycbwpYzRO0vSM8eqY8EVos4q9fF6pmVtLXhM6MGoqP3A7gppbq5JiQFsFLkmq8B5wKs_p/exec'
+const GAS_OTP_KEY = 'rg-otp-k9x2mw'
+// נתוני זוגות — Supabase
+const SETUP_GAS_URL = 'https://znodvoycqqyjohraoaex.supabase.co/functions/v1/api'
 
 const APP_BASE_URL = IS_LOCAL
   ? 'file:///C:/Users/Daniel%20Gurevich/OneDrive%20-%20Open%20University%20of%20Israel/שולחן%20העבודה/RegaClick/RegaClick/index.html'
@@ -247,7 +250,7 @@ export default function SetupPortal() {
     setLookupBtnDisabled(true)
 
     try {
-      const res = await fetch(`${SETUP_GAS_URL}?action=sendOTP&email=${encodeURIComponent(target)}`)
+      const res = await fetch(`${GAS_OTP_URL}?action=sendOTP&email=${encodeURIComponent(target)}&key=${GAS_OTP_KEY}`)
       const data = await res.json()
 
       if (!data.sent) {
@@ -294,15 +297,18 @@ export default function SetupPortal() {
 
     try {
       const res = await fetch(
-        `${SETUP_GAS_URL}?action=verifyOTP&email=${encodeURIComponent(email.trim())}&otp=${trimmedOtp}`
+        `${GAS_OTP_URL}?action=verifyOTP&email=${encodeURIComponent(email.trim())}&otp=${trimmedOtp}&key=${GAS_OTP_KEY}`
       )
       const data = await res.json()
 
       if (data.verified) {
         setOtpVisible(false)
-        if (data.found) {
+        // אחרי אימות — מביא נתוני זוג מSupabase (הנתונים שם, לא ב-GAS)
+        const lookupRes = await fetch(`${SETUP_GAS_URL}?action=lookup&email=${encodeURIComponent(email.trim())}`)
+        const lookupData = await lookupRes.json()
+        if (lookupData.found) {
           setLookupStatus({ text: '✓ ברוכים הבאים חזרה! הפרטים שלכם נטענו.', cls: 'found' })
-          populateForm(data.record)
+          populateForm(lookupData.record)
           setTimeout(() => {
             outputSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
           }, 300)
@@ -369,7 +375,7 @@ export default function SetupPortal() {
     try {
       await fetch(SETUP_GAS_URL, {
         method: 'POST',
-        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'save',
           email: email.trim(),

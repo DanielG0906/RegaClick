@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import './GuestUpload.css'
 
 // =============================== CONFIG ==========================================
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbwpYzRO0vSM8eqY8EVos4q9fF6pmVtLXhM6MGoqP3A7gppbq5JiQFsFLkmq8B5wKs_p/exec'
+const GAS_URL = 'https://znodvoycqqyjohraoaex.supabase.co/functions/v1/api'
 const SUPABASE_URL = 'https://znodvoycqqyjohraoaex.supabase.co'
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpub2R2b3ljcXF5am9ocmFvYWV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MDk2NjQsImV4cCI6MjA4ODk4NTY2NH0.1Hx_oI2eDaQEblEW_Jo7z1tpnBeApAl2QMHQKabUmC8'
 const BUCKET_NAME = 'wedding-uploads'
