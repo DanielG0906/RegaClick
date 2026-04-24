@@ -296,16 +296,14 @@ export default function SetupPortal() {
     setOtpBtnDisabled(true)
 
     try {
-      const res = await fetch(
-        `${GAS_OTP_URL}?action=verifyOTP&email=${encodeURIComponent(email.trim())}&otp=${trimmedOtp}&key=${GAS_OTP_KEY}`
-      )
-      const data = await res.json()
+      const [res, lookupRes] = await Promise.all([
+        fetch(`${GAS_OTP_URL}?action=verifyOTP&email=${encodeURIComponent(email.trim())}&otp=${trimmedOtp}&key=${GAS_OTP_KEY}`),
+        fetch(`${SETUP_GAS_URL}?action=lookup&email=${encodeURIComponent(email.trim())}`),
+      ])
+      const [data, lookupData] = await Promise.all([res.json(), lookupRes.json()])
 
       if (data.verified) {
         setOtpVisible(false)
-        // אחרי אימות — מביא נתוני זוג מSupabase (הנתונים שם, לא ב-GAS)
-        const lookupRes = await fetch(`${SETUP_GAS_URL}?action=lookup&email=${encodeURIComponent(email.trim())}`)
-        const lookupData = await lookupRes.json()
         if (lookupData.found) {
           setLookupStatus({ text: '✓ ברוכים הבאים חזרה! הפרטים שלכם נטענו.', cls: 'found' })
           populateForm(lookupData.record)
